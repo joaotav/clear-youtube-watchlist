@@ -76,4 +76,4 @@ videoRemovalTimer = setInterval(function () {
             );
             options.snapshotItem(0).click();
         }
-    } , 100);
+    } , 500);
