@@ -8,6 +8,7 @@ Works with Youtube Web in the following languages:
 # How to
 Navigate to your watch later page on youtube (https://www.youtube.com/playlist?list=WL).
 Open your browser's developer console (Ctrl + Shift + I (Windows) or Alt + Cmd + I (macOS))
+How to open your browser's developer console: https://help.securityjourney.com/en/articles/5464198-accessing-the-browser-console
 Copy the code from watchlistRemover.js and paste it in your browser's developer console.
 
 # Disclaimer
