@@ -40,6 +40,12 @@ var languageList = [{
     "removeButton": '//span[contains(text(),"에서 삭제")]',
 } ];
 
+if (document.URL !== "https://www.youtube.com/playlist?list=WL") {
+    if (window.confirm('Loading your watch later page (https://www.youtube.com/playlist?list=WL). Ok?')) {
+        window.location.assign("https://www.youtube.com/playlist?list=WL");
+    }
+}
+  
 watchlistVideos = document.getElementsByTagName('ytd-playlist-video-renderer');
 
 if (watchlistVideos[0]){
