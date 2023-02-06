@@ -40,46 +40,53 @@ var languageList = [{
     "removeButton": '//span[contains(text(),"에서 삭제")]',
 } ];
 
-if (document.URL !== "https://www.youtube.com/playlist?list=WL") {
-    if (window.confirm('Loading your watch later page (https://www.youtube.com/playlist?list=WL). Ok?')) {
-        window.location.assign("https://www.youtube.com/playlist?list=WL");
-    }
-}
-  
-watchlistVideos = document.getElementsByTagName('ytd-playlist-video-renderer');
+function clearWatchlist() {
+    watchlistVideos = document.getElementsByTagName('ytd-playlist-video-renderer');
 
-if (watchlistVideos[0]){
-    for (i in languageList) {
-        languageMatches = watchlistVideos[0].querySelector(languageList[i].primaryButton);
-            if (languageMatches) {
-                primaryButton = languageList[i].primaryButton;
-                removeButton = languageList[i].removeButton;
-            } 
-    }
-}
-
-var options = document.evaluate(
-    removeButton,
-    document,
-    null,
-    XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-    null
-);
-
-
-videoRemovalTimer = setInterval(function () {
-        if (watchlistVideos[0] == null) {
-            clearInterval(videoRemovalTimer)
-            alert("Watch later list cleared :-)");
-        } else {
-            watchlistVideos[0].querySelector(primaryButton).click();
-            var options = document.evaluate(
-                removeButton,
-                document,
-                null,
-                XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-                null
-            );
-            options.snapshotItem(0).click();
+    if (watchlistVideos[0]){
+        for (i in languageList) {
+            languageMatches = watchlistVideos[0].querySelector(languageList[i].primaryButton);
+                if (languageMatches) {
+                    primaryButton = languageList[i].primaryButton;
+                    removeButton = languageList[i].removeButton;
+                } 
         }
-    } , 500);
+    };
+
+    var options = document.evaluate(
+        removeButton,
+        document,
+        null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+        null
+    );
+
+
+    videoRemovalTimer = setInterval(function () {
+            if (watchlistVideos[0] == null) {
+                clearInterval(videoRemovalTimer)
+                alert("Watch later list cleared :-)");
+            } else {
+                watchlistVideos[0].querySelector(primaryButton).click();
+                var options = document.evaluate(
+                    removeButton,
+                    document,
+                    null,
+                    XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+                    null
+                );
+                options.snapshotItem(0).click();
+            }
+        } , 500);
+
+};
+
+if (document.URL !== "https://www.youtube.com/playlist?list=WL") {
+    alert('Please navigate to your watch later page before executing the script (https://www.youtube.com/playlist?list=WL)'); 
+} else {
+    if (confirm("Remove all videos in your watch list?")) {
+        clearWatchlist();
+    };
+};
+  
+
